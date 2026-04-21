@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Garden Drop</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+html, body {
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  margin:0;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  padding:35px 0;
+  gap:10px;
+  min-height:100vh;
+  background:linear-gradient(to bottom,#eef3e7,#e8efdd,#efe7cf);
+  box-sizing:border-box;
+}
+
+h1 { margin:8px 0 2px 0; font-size:44px; }
+
+.home-link {
+  position:absolute;
+  top:50px;
+  left:90px;
+  margin:0;
+  display:inline-block;
+  padding:7px 14px;
+  border:1px solid rgba(122, 91, 73, 0.65);
+  border-radius:8px;
+  text-decoration:none;
+  color:rgba(122, 91, 73, 0.9);
+  background:rgba(255, 255, 255, 0.45);
+  font-size:17px;
+  font-weight:500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.home-link:hover {
+  background:#7a5b49;
+  color:#fff;
+}
+
+#game {
+  position:relative;
+  flex:1 1 auto;
+  width:min(88vw, 900px);
+  min-height:420px;
+  margin-top:12px;
+  margin-bottom:0;
+  border:4px solid #7bc96f;
+  border-radius:16px;
+  overflow:hidden;
+  background:#dfe8d2;
+  outline:none;
+}
+
+.score-box {
+  position:absolute;
+  top:10px;
+  left:10px;
+  z-index:3;
+  background:rgba(255, 255, 255, 0.75);
+  border:1px solid rgba(122, 91, 73, 0.35);
+  border-radius:10px;
+  padding:8px 12px;
+  line-height:1.25;
+  font-size:15px;
+}
+
+.score-box p {
+  margin:0;
+}
+
+.player {
+  position:absolute; 
+  bottom:20px;
+  font-size:68px;
+  transform:translateX(-50%);
+  transition:left .2s;
+  z-index:2;
+}
+
+.object {
+  position:absolute;
+  font-size:56px;
+  transform:translateX(-50%);
+  z-index:1;
+}
+
+.plants {
+  position:absolute;
+  top:0;
+  bottom:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  font-size:30px;
+  transform:translateX(-50%);
+}
+
+#overlay {
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.5);
+  color:white;
+  display:none;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  z-index:10;
+}
+
+#gameOverText {
+  margin:0 0 4px 0;
+  font-size:clamp(1.55rem, 4.6vw, 2.25rem);
+  text-align:center;
+  max-width:90%;
+  line-height:1.2;
+  word-break:break-word;
+}
+
+#finalScore {
+  margin:14px 0;
+  font-size:clamp(1.1rem, 3vw, 1.5rem);
+  font-weight:600;
+}
+
+#overlay .restart-hint {
+  margin-top:14px;
+  font-size:clamp(1rem, 2.2vw, 1.2rem);
+  opacity:0.9;
+  font-style:italic;
+}
+
+button {
+  padding:10px 20px;
+  background:#facc15;
+  border:none;
+  border-radius:10px;
+  cursor:pointer;
+  font-size:0.95rem;
+  font-weight:600;
+}
+
+.legend {
+  display:flex;
+  gap:12px;
+  margin:6px 0 8px 0;
+}
+.legend-group {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 18px;
+  border-radius:10px;
+  font-size:19px;
+}
+.legend-good { background:#d9f99d; }
+.legend-bad { background:#e7d3b0; }
+.legend span { font-size:25px; }
+
+/* collect effect */
+.collect-effect {
+  position:absolute;
+  font-size:26px;
+  pointer-events:none;
+  animation:pop 0.5s ease-out forwards;
+  z-index:9;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+}
+
+@keyframes pop {
+  0% { transform:scale(0.5); opacity:1; }
+  50% { transform:scale(1.4); opacity:1; }
+  100% { transform:scale(1.8); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<a class="home-link" href="index.html">← Back to Home</a>
+<h1>🌼 Garden Drop 🌼</h1>
+
+<div class="legend">
+  <div class="legend-group legend-good">
+    <strong>Collect</strong>
+    <span>🥕</span><span>🍎</span><span>🥬</span>
+  </div>
+  <div class="legend-group legend-bad">
+    <strong>Avoid</strong>
+    <span>🪨</span><span>🐄</span><span>🪵</span>
+  </div>
+</div>
+<p style="margin:0 0 3px 0; font-size:18px; font-style:italic; opacity:0.85;">- use the arrow keys to move -</p>
+
+<div id="game" tabindex="0">
+  <div class="score-box">
+    <p>Score: <span id="score">0</span></p>
+    <p>High Score: <span id="highScore">0</span></p>
+  </div>
+  <div class="plants" style="left:33.33%"></div>
+  <div class="plants" style="left:66.66%"></div>
+  <div id="player" class="player">🧺</div>
+
+  <div id="overlay">
+    <h2 id="gameOverText">Oops!</h2>
+    <p id="finalScore"></p>
+    <button onclick="resetGame()">Restart</button>
+    <p class="restart-hint">(Press any key to restart)</p>
+  </div>
+</div>
+
+<script>
+const lanes = [0,1,2];
+let lane = 1;
+let score = 0;
+let gameOver = false;
+let objects = [];
+let lastSpawnTime = 0; // track spacing between objects
+
+const game = document.getElementById('game');
+const player = document.getElementById('player');
+const scoreEl = document.getElementById('score');
+const overlay = document.getElementById('overlay');
+const finalScore = document.getElementById('finalScore');
+const highScoreEl = document.getElementById('highScore');
+const gameOverText = document.getElementById('gameOverText');
+
+const gameOverMessages = [
+  "Oopsie daisy!",
+  "Aw shucks!",
+  "Oh fiddle!",
+  "Holy cow, what happened?",
+  "Not your finest harvest...",
+  "Darn, dandelions!"
+];
+
+let highScore = Number(localStorage.getItem('gardenHighScore')) || 0;
+highScoreEl.textContent = highScore;
+
+document.querySelectorAll('.plants').forEach(col => {
+  for (let i = 0; i < 20; i++) {
+    const p = document.createElement('div');
+    p.textContent = '🌱';
+    col.appendChild(p);
+  }
+});
+
+function laneToPercent(l) {
+  return l * 33.33 + 16.66;
+}
+
+function updatePlayer() {
+  player.style.left = laneToPercent(lane) + '%';
+}
+
+function gameLoop() {
+  if (gameOver) return;
+
+  const fallSpeed = 4.75 + score * 0.020;
+  const collisionY = game.clientHeight - 100;
+  const removeY = game.clientHeight - 20;
+  const effectY = game.clientHeight - 80;
+
+  objects.forEach(o => {
+    o.y += fallSpeed;
+    o.el.style.top = o.y + 'px';
+
+    if (Math.abs(o.y - collisionY) < 30 && o.lane === lane) {
+      if (o.type === 'collect') {
+        score += 10;
+        scoreEl.textContent = score;
+
+        // create visual effect
+        const effect = document.createElement('div');
+        effect.className = 'collect-effect';
+        effect.textContent = '✨';
+        effect.style.left = player.style.left;
+        effect.style.top = effectY + 'px';
+        game.appendChild(effect);
+
+        setTimeout(() => effect.remove(), 500);
+
+        o.el.remove();
+        o.y = 1000;
+      } else {
+        endGame();
+      }
+    }
+  });
+
+  objects = objects.filter(o => {
+    if (o.y >= removeY) {
+      o.el.remove();
+      return false;
+    }
+    return true;
+  });
+
+  requestAnimationFrame(gameLoop);
+}
+
+// CONSTANT STREAM: always spawning rows, never all 3 lanes filled
+function spawnLoop() {
+  if (gameOver) return;
+
+  // increase number of objects slightly as score increases
+  const maxObjects = Math.min(2 + Math.floor(score / 260), 3); // 2 → 3 max
+
+  const shuffled = [...lanes].sort(() => Math.random() - 0.5);
+  const chosen = shuffled.slice(0, maxObjects);
+
+  // ensure at least one safe (collect) lane ALWAYS
+  const safeIndex = Math.floor(Math.random() * chosen.length);
+
+  // stagger items so they never start at the exact same time
+  let t = 0;
+  chosen.forEach((laneIndex, i) => {
+    t += 620 + Math.random() * 380; // wider spacing (620–1000ms)
+    setTimeout(() => {
+      if (gameOver) return;
+      const type = i === safeIndex ? 'collect' : (Math.random() < 0.5 ? 'collect' : 'obstacle');
+      spawnObject(laneIndex, type);
+    }, t);
+  });
+
+  const delay = Math.max(950, 1350 - score * 1.2); // slightly denser stream
+  setTimeout(spawnLoop, delay);
+}
+
+function spawnObject(laneIndex, forcedType=null) {
+  if (gameOver) return;
+
+  const now = Date.now();
+  const minGap = 1100; // minimum time between objects
+
+  if (now - lastSpawnTime < minGap) {
+    setTimeout(() => spawnObject(laneIndex, forcedType), minGap - (now - lastSpawnTime));
+    return;
+  }
+
+  lastSpawnTime = Date.now();
+  const type = forcedType ? forcedType : (Math.random() < 0.6 ? 'collect' : 'obstacle');
+  const items = type === 'collect'
+    ? ['🥕','🍎','🥬']
+    : ['🪨','🐄','🪵'];
+
+  const el = document.createElement('div');
+  el.className = 'object';
+  el.textContent = items[Math.floor(Math.random()*items.length)];
+
+  const obj = { el, lane: laneIndex, y: 0, type };
+
+  el.style.left = laneToPercent(laneIndex) + '%';
+  game.appendChild(el);
+  objects.push(obj);
+}
+
+function endGame() {
+  gameOver = true;
+
+  // update high score
+  if (score > highScore) {
+    highScore = score;
+    localStorage.setItem('gardenHighScore', highScore);
+    highScoreEl.textContent = highScore;
+  }
+
+  // pick random message
+  const msg = gameOverMessages[Math.floor(Math.random() * gameOverMessages.length)];
+  gameOverText.textContent = msg;
+
+  overlay.style.display = 'flex';
+  finalScore.textContent = 'Score: ' + score;
+}
+
+function resetGame() {
+  objects.forEach(o => o.el.remove());
+  objects = [];
+  score = 0;
+  lane = 1;
+  gameOver = false;
+  scoreEl.textContent = score;
+  overlay.style.display = 'none';
+  updatePlayer();
+  gameLoop();
+  spawnLoop();
+}
+
+document.addEventListener('keydown', (e) => {
+  // restart on any key when game over
+  if (gameOver) {
+    resetGame();
+    return;
+  }
+
+  if (["ArrowLeft","ArrowRight"].includes(e.key)) e.preventDefault();
+
+  if (e.key === 'ArrowLeft') lane = Math.max(lane - 1, 0);
+  if (e.key === 'ArrowRight') lane = Math.min(lane + 1, 2);
+
+  updatePlayer();
+});
+
+updatePlayer();
+
+game.addEventListener('click', () => game.focus());
+
+game.focus();
+gameLoop();
+spawnLoop();
+</script>
+
+</body>
+</html>

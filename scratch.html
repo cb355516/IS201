@@ -5,35 +5,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scratch</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Raleway:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet" />
     <link href="css/new.css" rel="stylesheet" />
 </head>
 
-<body>
-    <h1>My Scratch Page</h1>
-    <nav class="navbar navbar-expand-lg navbar-dark py-lg-4" id="mainNav">
-            <div class="container">
-                <a class="navbar-brand text-uppercase fw-bold d-lg-none" href="index.html">Start Bootstrap</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="index.html">Home</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="about.html">About</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="products.html">Products</a></li>
-                        <li class="nav-item px-lg-4"><a class="nav-link text-uppercase" href="scratch.html">Scratch</a></li>
+<body id="top">
+    <a id="back-to-home" href="index.html">Back to Home</a>
+    <h1>Gardening</h1>
+    <nav class="simple-menu" aria-label="Scratch page sections">
+        <div class="simple-menu-items">
+            <a href="#gardenlist">How To Get Started</a>
+            <a href="#video">Beginner Tips</a>
+            <a href="#planting-guide">Planting Guide</a>
+            <a href="game.html">Garden Game</a>
+        </div>
+    </nav>
+    <div class="garden-feature">
+        <div class="garden-image-wrap">
+            <img class="garden-image" src="assets/img/garden.webp" alt="Garden" />
+        </div>
+        <div id="gardenlist">
+            <p>Growing up, my family loved planing our garden every year and enjoying the fruits of our labor, including
+                homeade salsa! I highly recommend gardening to anyone who's interested in trying. Here's how to get
+                started:</p>
+            <ol>
+                <li>Prepare a spot
+                    <ul>
+                        <li>Choose a spot in your yard with soft dirt or use a large container/planter box and fill it with dirt</li>
+                        <li>Clear the dirt of any rocks</li>
+                        <li>Loosen the dirt with a shovel or tiller</li>
+                        <li>Pour nutrient-rich soil on top and lighly mix it in with some of the dirt, keeping most of the soil on top</li>
                     </ul>
-                </div>
-            </div>
-        </nav>
-    <div class='tableauPlaceholder' id='viz1776193874788' style='position: relative'><noscript><a href='#'><img
-                    alt='Travel Tracker '
-                    src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;QG&#47;QG757MTF9&#47;1_rss.png'
+                </li>
+                <li>Choose your plants
+                    <ul>
+                        <li>This is the fun part! You get to choose from countless plants which ones you want to grow in your garden!</li>
+                        <li>Depending on how much space you have, I'd recommend selecting 3 - 8 different types of plants and get a few of each kind</li>
+                        <li>You can buy the seeds directly, but I like buying seedlings (small plants) and then just transplanting them into my garden</li>
+                    </ul>
+                </li>
+                <li>Care for your garden
+                    <ul>
+                        <li>Whether using a sprinkler system, drip irrigation, or hand-watering, make sure your plants are being watered regularly</li>
+                        <li>Make sure your plants are getting enough sunlight</li>
+                        <li>Keep an eye out for weeds and remove them as needed</li>
+                    </ul>
+                </li>
+                <li>Harvest your crops
+                    <ul>
+                        <li>When your produce is ready and ripe, collect the fruits or vegetables and enjoy the fruit of you labors!</li>
+                        <li>Get creative with different ways you can prepare and cook with your fresh produce</li>
+                        <li>Share your harvest with friends and family!</li>
+                    </ul>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <div id="video">
+        <p id="text">Watch this video for some beginner gardening tips :)</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/lRPpXc03onk?si=jQM0ytMwyBQe5Z3W"
+            title="YouTube video player" frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <div class="viz-container" id="planting-guide">
+        <div class='tableauPlaceholder' id='viz1776404365927' style='position: relative'><noscript><a href='#'><img
+                    alt='Dashboard 1 '
+                    src='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AG&#47;AGardenersPlantingGuide&#47;Dashboard1&#47;1_rss.png'
                     style='border: none' /></a></noscript><object class='tableauViz' style='display:none;'>
             <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
             <param name='embed_code_version' value='3' />
-            <param name='path' value='shared&#47;QG757MTF9' />
+            <param name='site_root' value='' />
+            <param name='name' value='AGardenersPlantingGuide&#47;Dashboard1' />
+            <param name='tabs' value='no' />
             <param name='toolbar' value='yes' />
             <param name='static_image'
-                value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;QG&#47;QG757MTF9&#47;1.png' />
+                value='https:&#47;&#47;public.tableau.com&#47;static&#47;images&#47;AG&#47;AGardenersPlantingGuide&#47;Dashboard1&#47;1.png' />
             <param name='animate_transition' value='yes' />
             <param name='display_static_image' value='yes' />
             <param name='display_spinner' value='yes' />
@@ -41,8 +94,11 @@
             <param name='display_count' value='yes' />
             <param name='language' value='en-US' />
         </object></div>
+    </div>
+    <a class="top-of-page-link" href="#top">Top of Page</a>
+    
     <script
-        type='text/javascript'>                    var divElement = document.getElementById('viz1776193874788'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '1024px'; vizElement.style.height = '795px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
+        type='text/javascript'>                    var divElement = document.getElementById('viz1776404365927'); var vizElement = divElement.getElementsByTagName('object')[0]; vizElement.style.width = '800px'; vizElement.style.height = '1627px'; var scriptElement = document.createElement('script'); scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js'; vizElement.parentNode.insertBefore(scriptElement, vizElement);                </script>
 </body>
 
 </html>

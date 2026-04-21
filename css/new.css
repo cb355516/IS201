@@ -1,4 +1,201 @@
-h1  {
-    color: #45aac8;
-    text-weight: bold;
+body {
+    background-color: #f7e6d2;
+}
+
+h1 {
+    color: #7a5b49;
+    font-family: 'Patrick Hand', cursive;
+    font-weight: normal;
+    text-align: center;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.05;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.viz-container {
+    display: flex;
+    justify-content: center;
+    padding: 2rem 1rem 2rem;
+}
+
+.tableauPlaceholder {
+    max-width: 100%;
+}
+
+.tableauPlaceholder .tableauViz {
+    width: 800px;
+    max-width: 100%;
+}
+#back-to-home {
+    display: block;
+    width: fit-content;
+    text-align: center;
+    text-decoration: none;
+    margin: 2rem auto 1.5rem;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.25rem;
+    color: #7a5b49;
+    position: relative;
+    padding: 0.75rem 1.25rem;
+}
+
+#back-to-home::before,
+#back-to-home::after {
+    content: '';
+    display: block;
+    align-items: center;
+    width: 6rem;
+    height: 2px;
+    background: #7a5b49;
+    margin: 0.5rem auto;
+    margin-top: -1rem;
+    margin-bottom: -1rem;
+}
+
+#back-to-home::before {
+    margin-bottom: 0.35rem;
+}
+
+#back-to-home::after {
+    margin-top: 0.35rem;
+}
+
+#back-to-home:hover {
+    opacity: 0.85;
+}
+
+.simple-menu {
+    width: min(96%, 980px);
+    margin: 0.5rem auto 1.5rem;
+    font-family: "Patrick Hand", cursive;
+    color: #7a5b49;
+    border: none;
+    background: transparent;
+    box-shadow: none;
+    padding: 0;
+}
+
+.simple-menu-items {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 0.55rem;
+    flex-wrap: wrap;
+}
+
+.simple-menu a {
+    color: #7a5b49;
+    text-decoration: none;
+    padding: 0.42rem 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 0.35rem;
+    background: rgba(255, 255, 255, 0.42);
+    white-space: nowrap;
+}
+
+.simple-menu a:hover {
+    background: rgba(122, 91, 73, 0.14);
+    border-color: rgba(122, 91, 73, 0.3);
+}
+
+.nav {
+
+}
+
+.garden-feature {
+    max-width: min(1040px, calc(100% - 1.5rem));
+    margin: 0 auto;
+}
+
+.garden-image-wrap {
+    display: flex;
+    justify-content: flex-start;
+    padding: 0.5rem 0 1.5rem;
+}
+
+.garden-image {
+    width: min(820px, 100%);
+    height: auto;
+    border-radius: 0.5rem;
+    border: 5px solid rgba(122, 91, 73, 0.35);
+    outline-offset: 4px;
+}
+
+#gardenlist {
+    width: min(820px, calc(100% - 0.5rem));
+    margin: -12.5rem 0 0 auto;
+    transform: translate(0, 1.5rem);
+    padding: 1rem 1.25rem;
+    color: #7a5b49;
+    font-family: 'Patrick Hand', serif;
+    background: rgba(198, 224, 155, 0.88);
+    border: none;
+    outline: none;
+    border-radius: 0.7rem;
+    box-shadow: 0 10px 28px rgba(79, 60, 49, 0.28);
+    position: relative;
+    z-index: 2;
+
+    font-size: 0.97rem;
+    border: none;
+
+}
+
+#gardenlist ul {
+    list-style: none;
+    padding-left: 1.2rem;
+}
+
+#gardenlist ul li::before {
+    content: "- ";
+}
+#text{
+    color: #7a5b49;
+    font-family: 'Patrick Hand', serif;
+    font-size: 1.3rem;
+    margin: 0px;
+    padding-bottom:4px;
+
+}
+#video {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.75rem;
+    padding: 0.4rem 0.5rem;
+    margin-top: 70px;
+    border: 6px double #7a5b49;
+    border-radius: 0.5rem;
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+}
+
+.top-of-page-link {
+    display: block;
+    width: fit-content;
+    margin: 0 auto 2rem;
+    padding: 0.42rem 0.75rem;
+    text-decoration: none;
+    color: #7a5b49;
+    font-family: "Patrick Hand", cursive;
+    font-size: inherit;
+    border: 1px solid transparent;
+    border-radius: 0.35rem;
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.top-of-page-link:hover {
+    background: rgba(122, 91, 73, 0.14);
+    border-color: rgba(122, 91, 73, 0.3);
+}
+
+@media (max-width: 992px) {
+    #gardenlist {
+        transform: none;
+    }
 }
