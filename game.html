@@ -268,7 +268,7 @@ function updatePlayer() {
 function gameLoop() {
   if (gameOver) return;
 
-  const fallSpeed = 4.75 + score * 0.020;
+  const fallSpeed = 2.3 + score * 0.01;
   const collisionY = game.clientHeight - 100;
   const removeY = game.clientHeight - 20;
   const effectY = game.clientHeight - 80;
@@ -327,7 +327,7 @@ function spawnLoop() {
   // stagger items so they never start at the exact same time
   let t = 0;
   chosen.forEach((laneIndex, i) => {
-    t += 620 + Math.random() * 380; // wider spacing (620–1000ms)
+    t += 320 + Math.random() * 220; // spacing (320–540ms)
     setTimeout(() => {
       if (gameOver) return;
       const type = i === safeIndex ? 'collect' : (Math.random() < 0.5 ? 'collect' : 'obstacle');
@@ -335,7 +335,7 @@ function spawnLoop() {
     }, t);
   });
 
-  const delay = Math.max(950, 1350 - score * 1.2); // slightly denser stream
+  const delay = Math.max(700, 980 - score * 1.5); // denser stream
   setTimeout(spawnLoop, delay);
 }
 
@@ -343,7 +343,7 @@ function spawnObject(laneIndex, forcedType=null) {
   if (gameOver) return;
 
   const now = Date.now();
-  const minGap = 1100; // minimum time between objects
+  const minGap = 700; // minimum time between objects
 
   if (now - lastSpawnTime < minGap) {
     setTimeout(() => spawnObject(laneIndex, forcedType), minGap - (now - lastSpawnTime));
